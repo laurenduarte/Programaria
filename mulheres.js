@@ -47,12 +47,52 @@ function criaMulher(request, response){
     response.json(mulheres)
 }
 
+//PATCH
+function corrigeMulher(request, response){
+    function encontraMulher(mulher){
+        if(mulher.id === request.params.id){
+            return mulher
+        }
+    }
+
+    const mulherEncontrada = mulheres.find(encontraMulher)
+
+    if (request.body.nome) {
+        mulherEncontrada.nome = request.body.nome
+    }
+
+    if (request.body.minibio) {
+        mulherEncontrada.minibio = request.body.minibio
+    }
+
+    if (request.body.imagem) {
+        mulherEncontrada.imagem = request.body.imagem
+    }
+
+    response.json(mulheres)
+}
+
+//DELETE
+function deletaMulher(request, response){
+    function todasMenosEla(mulher){
+        if(mulher.id !== request.params.id){
+            return mulher
+        }
+    }
+
+    const mulheresQueFicam = mulheres.filter(todasMenosEla)
+
+    response.json(mulheresQueFicam)
+}
+
+app.use(router.get('/mulheres', mostraMulheres))
+app.use(router.post('/mulheres', criaMulher))
+app.use(router.patch('/mulheres/:id', corrigeMulher))
+app.use(router.delete('/mulheres/:id', deletaMulher))
 
 //PORTA
 function mostraPorta() {
     console.log("Servidor criado e rodando na porta ", porta)
 }
 
-app.use(router.get('/mulheres', mostraMulheres))
-app.use(router.post('/mulheres', criaMulher))
 app.listen(porta, mostraPorta)
