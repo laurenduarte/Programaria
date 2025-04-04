@@ -12,7 +12,7 @@ const porta = 3333
 
 
 //GET
-function mostraMulheres(request, response) {
+async function mostraMulheres(request, response) {
     try{
         const mulheresVindasDoBandoDeDados = await Mulher.find()
 
