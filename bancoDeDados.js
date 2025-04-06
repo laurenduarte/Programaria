@@ -2,7 +2,7 @@ const mongoose = require("mongoose")
 require('dotenv').config()
 
 
-async function conectaBancoDeDados(){s
+async function conectaBancoDeDados(){
     try{
         console.log("Conexão com o banco de dados iniciou")
 
